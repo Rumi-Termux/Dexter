@@ -47,13 +47,13 @@ function startBot() {
       setTimeout(() => bot.setControlState('jump', false), 500);
     }
   }, 15000);
-
+  
   bot.on('end', () => {
-    console.log("Bot düştü. Yeniden başlatılıyor...");
+    console.log("Bot düştü. Sunucunun oturumu kapatması için 40sn bekleniyor...");
     clearInterval(jumpInterval);
-    setTimeout(() => process.exit(1), 5000);
+    // 5000 yerine 40000 (40 saniye) yaptık
+    setTimeout(() => process.exit(1), 40000); 
   });
 }
-
 process.on('uncaughtException', (err) => console.log('Hata:', err));
 process.on('unhandledRejection', (err) => console.log('Hata:', err));
