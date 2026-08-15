@@ -4,7 +4,6 @@ const mineflayer = require('mineflayer');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Web Sunucusu (UptimeRobot için)
 app.get('/', (req, res) => {
   res.send('Bot aktif!');
 });
@@ -42,7 +41,6 @@ function startBot() {
     }
   });
 
-  // AFK Kalmama (Zıplama Döngüsü)
   const jumpInterval = setInterval(() => {
     if (bot.entity) {
       bot.setControlState('jump', true);
@@ -51,12 +49,11 @@ function startBot() {
   }, 15000);
 
   bot.on('end', () => {
-    console.log("Bot sunucudan ayrıldı. Yeniden başlatılıyor...");
+    console.log("Bot düştü. Yeniden başlatılıyor...");
     clearInterval(jumpInterval);
     setTimeout(() => process.exit(1), 5000);
   });
 }
 
-// Çökmeyi Engelleyici Hata Yakalayıcılar
 process.on('uncaughtException', (err) => console.log('Hata:', err));
 process.on('unhandledRejection', (err) => console.log('Hata:', err));
